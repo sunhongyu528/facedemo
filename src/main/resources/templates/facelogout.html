@@ -6,14 +6,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>人脸logout分机</title>
 </head>
-<body>
-<h1>人脸分机注销</h1>
-<video id="video" width="480" height="320" controls>
-</video>
-<div>
-    <button id="capture">分机注销</button>
+
+<body class="menu-always-on-top">
+
+<!-- Global styles BEGIN -->
+<link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<!-- Global styles END -->
+<!-- Page level plugin styles BEGIN -->
+<link href="pages/css/animate.css" rel="stylesheet">
+<link href="plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+<!-- Page level plugin styles END -->
+<!-- Theme styles BEGIN -->
+<link href="pages/css/components.css" rel="stylesheet">
+<link href="pages/css/slider.css" rel="stylesheet">
+<link href="onepage/css/style.css" rel="stylesheet">
+<link href="onepage/css/style-responsive.css" rel="stylesheet">
+<link href="onepage/css/themes/red.css" rel="stylesheet" id="style-color">
+<link href="onepage/css/custom.css" rel="stylesheet">
+<!-- Theme styles END -->
+
+<div class="header header-mobi-ext">
+    <div class="container" >
+        <div class="row">
+            <!-- Logo BEGIN -->
+
+            <!-- Logo END -->
+            <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+            <!-- Navigation BEGIN -->
+            <div class="col-md-10 pull-right">
+                <ul class="header-navigation">
+                    <li ><a href="/">首页</a></li>
+                    <li><a href="/register">注册</a></li>
+                    <li><a href="/login">登录</a></li>
+                    <li class="current"><a href="/logout">注销</a></li>
+
+                </ul>
+            </div>
+            <!-- Navigation END -->
+        </div>
+    </div>
 </div>
-<canvas id="canvas" width="480" height="320"></canvas>
+<div class="services-block content content-center" id="services">
+    <div class="container">
+        <h1>人脸分机注销</h1>
+        <video id="video" width="480" height="320" controls>
+        </video>
+        <div>
+            <button class="btn btn-primary" id="capture">分机注销</button>
+        </div>
+        <canvas id="canvas" width="480" height="320"></canvas>
+    </div>
+</div>
 <script>
     //访问用户媒体设备的兼容方法
     function getUserMedia(constraints, success, error) {
@@ -72,8 +116,23 @@
                 /* alert(data) */
                 var result = eval(data);
                 console.log(data)
+                var phonenum =data;
                 if(result){
                     alert(data+"注销成功，http://127.0.0.1:8080/unregister?j100IP=192.168.102.91&port=80&username=admin&password=Avaya123!&sipUserId="+data)
+                    //window.location.href = "http://127.0.0.1:8080/unregister?j100IP=192.168.102.91&port=80&username=admin&password=Avaya123!&sipUserId="+data;
+                    $.ajax({
+                        type: 'GET',
+                        url: "http://cpaas.changhongit.com:8083/unregister",
+                        data:{'j100IP':"192.168.102.91",'port':"80",'username':"admin",'password':"Avaya123!",'sipLoginName':phonenum},
+
+                        success:function(data){
+                            console.log(data);
+                        },
+                        error:function(textStatus, errorThrown){
+                            console.log(errorThrown);
+                        }
+                    });
+
                 } else {
                     alert("面容识别失败,请继续验证");
                 }
@@ -87,6 +146,19 @@
     }
 
 </script>
-<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="plugins/jquery.min.js" type="text/javascript"></script>
+<script src="plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- Core plugins END (For ALL pages) -->
+<!-- Core plugins BEGIN (required only for current page) -->
+<script src="plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+<script src="plugins/jquery.easing.js"></script>
+<script src="plugins/jquery.parallax.js"></script>
+<script src="plugins/jquery.scrollTo.min.js"></script>
+<script src="onepage/scripts/jquery.nav.js"></script>
+<!-- Core plugins END (required only for current page) -->
+<!-- Global js BEGIN -->
+<script src="onepage/scripts/layout.js" type="text/javascript"></script>
+<script src="pages/scripts/bs-carousel.js" type="text/javascript"></script>
 </body>
 </html>

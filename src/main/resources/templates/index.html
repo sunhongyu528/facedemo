@@ -1,21 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<base th:href="@{/}">
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
 </head>
-<body>
+<body class="menu-always-on-top">
 
-<a href="/register">人脸注册分机</a>
+<!-- Global styles BEGIN -->
+<link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<!-- Global styles END -->
+<!-- Page level plugin styles BEGIN -->
+<link href="pages/css/animate.css" rel="stylesheet">
+<link href="plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+<!-- Page level plugin styles END -->
+<!-- Theme styles BEGIN -->
+<link href="pages/css/components.css" rel="stylesheet">
+<link href="pages/css/slider.css" rel="stylesheet">
+<link href="onepage/css/style.css" rel="stylesheet">
+<link href="onepage/css/style-responsive.css" rel="stylesheet">
+<link href="onepage/css/themes/red.css" rel="stylesheet" id="style-color">
+<link href="onepage/css/custom.css" rel="stylesheet">
+<!-- Theme styles END -->
 
-<br>
-<a href="/login">人脸分机登录</a>
+<div class="header header-mobi-ext">
+    <div class="container" >
+        <div class="row">
+            <!-- Logo BEGIN -->
 
-<br>
-<a href="/logout">人脸分机注销</a>
+            <!-- Logo END -->
+            <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+            <!-- Navigation BEGIN -->
+            <div class="col-md-10 pull-right">
+                <ul class="header-navigation">
+                    <li class="current"><a href="/">首页</a></li>
+                    <li><a href="/register">注册</a></li>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/logout">注销</a></li>
 
-<br>
+                </ul>
+            </div>
+            <!-- Navigation END -->
+        </div>
+    </div>
+</div>
 
+<div class="services-block" id="services">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">人脸识别话机登录系统</h1>
+            <p class="lead">在开放的工作环境，有空闲工位，访客或员工扫二维码或人脸识别登录话机</p>
+            <hr class="my-4">
+            <p>注册：注册用户人脸并捆绑分机号码</p>
+            <p>登录：通过用户人脸识别，登录到相应的分机</p>
+            <p>注销：通过用户人脸识别，注销相应的分机</p>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="plugins/jquery.min.js" type="text/javascript"></script>
+<script src="plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- Core plugins END (For ALL pages) -->
+<!-- Core plugins BEGIN (required only for current page) -->
+<script src="plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+<script src="plugins/jquery.easing.js"></script>
+<script src="plugins/jquery.parallax.js"></script>
+<script src="plugins/jquery.scrollTo.min.js"></script>
+<script src="onepage/scripts/jquery.nav.js"></script>
+<!-- Core plugins END (required only for current page) -->
+<!-- Global js BEGIN -->
+<script src="onepage/scripts/layout.js" type="text/javascript"></script>
+<script src="pages/scripts/bs-carousel.js" type="text/javascript"></script>
 
 </body>
 </html>

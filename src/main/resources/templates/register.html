@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<base th:href="@{/}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/faceLogin/register1">
+    <dl class="admin_login">
+        <dt>
+            <strong>人脸识别头像录入</strong>
+            <em></em>
+            请输入分机号码：<input type="text" name="phone" id="phone" />
+        </dt>
+        <div id="media">
+            <video id="video" width="350" height="200" autoplay></video>
+            <canvas id="canvas" width="350" height="200"></canvas>
+        </div>
+        <dd>
+            <input type="button" onclick="registe()" value="立即注册" class="submit_btn" />
+        </dd>
+
+    </dl>
+    <script type="text/javascript">
+
+        var canvans = document.getElementById("canvas");
+        var video = document.getElementById("video"); //获取video标签
+        var context = canvas.getContext("2d");
+
+        var con  ={
+            audio:false,
+            video:{
+                width:359,
+                height:200,
+            }
+        };
+
+
+
+        //导航 获取用户媒体对象
+        navigator.mediaDevices.getUserMedia(con)
+            .then(function(stream){
+                try{
+                    video.src = window.URL.createObjectURL(stream);
+                }catch(e){
+                    video.srcObject = stream;
+                };
+                video.onloadmetadate = function(e){
+                    video.play();
+                }
+            });
+
+        function registe(){
+
+            context.drawImage(video,0,0);
+            var imgData = canvans.toDataURL();
+            var imgData1 = imgData.split("base64,")[1];
+            console.log(imgData1);
+
+            var phone = $("#phone").val();
+            console.log(phone);
+            $.ajax({
+                type:"post",
+                url:"/face/register1",
+                data: {"img":imgData1,"phone":phone},
+                success:function(data){
+                    alert(data);
+                },error:function(msg){
+                    alert("错误");
+                }
+            });
+        }
+    </script>
+</form>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+</body>
+</html>

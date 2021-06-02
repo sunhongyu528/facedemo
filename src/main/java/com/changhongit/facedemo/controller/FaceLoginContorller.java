@@ -17,6 +17,8 @@ public class FaceLoginContorller {
     @Autowired
     private BaiDuAIUtils baiDuAIUtils;
 
+
+
     //刷脸登录二维码  返回QRcode对象（code，image）
     @RequestMapping(value = "/qrcode",method = RequestMethod.GET)
     public Result qrcode() throws Exception{
@@ -72,5 +74,20 @@ public class FaceLoginContorller {
         JSONObject register1 = aipFace.addUser(img, "BASE64", "poc1", phone, options);
         System.out.println(register1.toString());
         return register1.toString();
+    }
+
+
+    //人脸登录
+    @RequestMapping("/logoutByFace")
+    public String logoutByFace(@RequestParam String img) throws Exception{
+        System.out.println("人脸识别开始");
+        System.out.println(img);
+        String s = baiDuAIUtils.faceSearch(img);
+        System.out.println(s);
+        String s1="分机"+s+"，已经注销";
+        System.out.println(s1);
+        baiDuAIUtils.faceDel(s);
+        return s;
+
     }
 }

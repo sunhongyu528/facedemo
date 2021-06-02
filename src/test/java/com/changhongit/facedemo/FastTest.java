@@ -3,9 +3,11 @@ package com.changhongit.facedemo;
 
 import com.baidu.aip.face.AipFace;
 import com.baidu.aip.util.Base64Util;
+import com.changhongit.facedemo.utils.BaiDuAIUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,7 +19,7 @@ public class FastTest {
 
     private AipFace aipFace;
 
-
+    private  BaiDuAIUtils baiDuAIUtils;
 
     @Test
     public void testRegister() throws Exception{
@@ -66,4 +68,56 @@ public class FastTest {
         System.out.println(search);
 
     }
+
+    @Test
+    public void facedel(){
+        aipFace=new AipFace("20114724","w9KGBy3LB27898lkyqg9EtTK","TIGU9668Le6MA7wbBzHg8ESQGqpSjUGb");
+        HashMap<String, String> options = new HashMap<String, String>();
+
+        String userId = "80210";
+        String groupId = "poc1";
+        String faceToken = "3d8e93de97b3ed4dd9c40bb9dda2faf9";
+
+        JSONObject jsonObject = aipFace.faceDelete(userId, groupId, faceToken, options);
+        System.out.println(jsonObject.toString());
+    }
+
+
+    @Test
+    public void userGet(){
+        aipFace=new AipFace("20114724","w9KGBy3LB27898lkyqg9EtTK","TIGU9668Le6MA7wbBzHg8ESQGqpSjUGb");
+        HashMap<String, String> options = new HashMap<String, String>();
+        String userId = "80210";
+        String groupId = "poc1";
+        // 用户信息查询
+        JSONObject res = aipFace.getUser(userId, groupId, options);
+        System.out.println(res.toString());
+    }
+
+
+    @Test
+    public void usergetList() throws JSONException {
+//        aipFace=new AipFace("20114724","w9KGBy3LB27898lkyqg9EtTK","TIGU9668Le6MA7wbBzHg8ESQGqpSjUGb");
+//
+//        // 传入可选参数调用接口
+//        HashMap<String, String> options = new HashMap<String, String>();
+//
+//        String userId = "80210";
+//        String groupId = "poc1";
+//
+//        // 获取用户人脸列表
+//        JSONObject res = aipFace.faceGetlist(userId, groupId, options);
+//        System.out.println(res.toString());
+//        String result = res.getString("result");
+//        System.out.println(result);
+//        String[] split = result.split(":");
+//
+//        int length = split.length;
+//        System.out.println(length);
+//        String str=split[5];
+//        String faceToken =str.substring(1,str.length()-4);
+//        System.out.println(faceToken);
+
+    }
+
 }

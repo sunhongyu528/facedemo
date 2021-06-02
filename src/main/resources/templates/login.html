@@ -2,59 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-
-
-
-
-<style type="text/css">
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        height: 100vh;
-        background-position: center;
-        overflow: hidden;
-    }
-
-    h1 {
-        color: #fff;
-        text-align: center;
-        font-weight: 100;
-        margin-top: 40px;
-    }
-
-    #media {
-        width: 280px;
-        height: 250px;
-        margin: 10px auto 0;
-        border-radius: 30px;
-        overflow: hidden;
-
-    }
-
-    #video {
-
-    }
-
-    #canvas {
-        display: none;
-    }
-
-    #btn {
-        width: 160px;
-        height: 50px;
-        background: #03a9f4;
-        margin: 70px auto 0;
-        text-align: center;
-        line-height: 50px;
-        color: #fff;
-        border-radius: 40px;
-    }
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>人脸登录</title>
 </head>
 
 <body>
@@ -62,12 +12,14 @@
 <form action="/facelogin" method="get">
     <dl class="admin_login">
         <dt>
-            <strong>人脸识别登录管理系统</strong><em>开启摄像头，调试角度</em> <strong>请把你的脸放摄像头面前</strong>
+            <strong>人脸识别登录管理系统</strong>
+            <br>
+            <em>开启摄像头，调试角度</em> <strong>请把你的脸放摄像头面前</strong>
         </dt>
 
         <div id="media">
-            <video id="video" width="350" height="200" autoplay></video>
-            <canvas id="canvas" width="400" height="300"></canvas>
+            <video id="video" width="480" height="320" autoplay></video>
+            <canvas id="canvas" width="480" height="320"></canvas>
         </div>
         <dd>
             <input type="button" onclick="query()" value="立即登录" class="submit_btn" />
@@ -83,10 +35,12 @@
         var con  ={
             audio:false,
             video:{
-                width:1980,
-                height:1024,
+                disaplay:true,
+                width:480,
+                height:320,
             }
         };
+
 
         //导航 获取用户媒体对象
         navigator.mediaDevices.getUserMedia(con)
@@ -104,7 +58,7 @@
         function query(){
 
             //把流媒体数据画到convas画布上去
-            context.drawImage(video,0,0,400,300);
+            context.drawImage(video,0,0,480,320);
             var imgData = canvans.toDataURL();
             var imgData1 = imgData.split("base64,")[1];
 
@@ -118,7 +72,7 @@
                     var result = eval(data);
                     console.log(data)
                     if(result){
-                        alert(data+"登录成功")
+                        alert(data+"登录成功，http://127.0.0.1:8080/register?j100IP=192.168.102.91&port=80&username=admin&password=Avaya123!&sipLoginName="+data+"&sipLoginPassword=123457")
                     } else {
                         alert("面容识别失败,请继续验证");
                     }

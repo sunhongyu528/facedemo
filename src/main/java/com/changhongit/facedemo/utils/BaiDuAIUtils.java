@@ -64,6 +64,7 @@ public class BaiDuAIUtils {
 
     public String faceSearch(String image){
         JSONObject res = client.search(image, IMGE_TYPE, groupId, options);
+
         if(res.has("error_code")&&res.getInt("error_code")==0){
             JSONObject result = res.getJSONObject("result");
             JSONArray user_list = result.getJSONArray("user_list");
@@ -78,4 +79,36 @@ public class BaiDuAIUtils {
         }
         return null;
     }
+
+    //人脸删除
+
+    public void faceDel(String userid){
+
+
+        System.out.println("开始删除");
+        String groupId = "poc1";
+        System.out.println(userid);
+
+
+
+        JSONObject jsonObject = client.faceGetlist(userid, groupId, null);
+
+
+        System.out.println(jsonObject.toString());
+        JSONObject result = jsonObject.getJSONObject("result");
+        System.out.println(result);
+        String face_list = result.toString();
+        System.out.println(face_list);
+        String[] split = face_list.split(":");
+
+        int length = split.length;
+        System.out.println(length);
+        String str=split[5];
+        String faceToken =str.substring(1,str.length()-4);
+        System.out.println(faceToken);
+
+        client.faceDelete(userid, groupId, faceToken, null);
+
+    }
+
 }

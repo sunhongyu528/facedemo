@@ -7,20 +7,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 
 public class Hello {
-    @ResponseBody
+
     @RequestMapping("/")
     public String hello(){
-        return "hello";
+        return "index";
     }
 
     @RequestMapping("/register")
     public String register(){
-        return "register";
+        return "faceregister";
     }
 
     @RequestMapping("/login")
     public String login(){
-        return "login";
+        return "facelogin";
+    }
+
+
+    @RequestMapping("/logout")
+    public String logout(){
+        return "facelogout";
     }
 
 
